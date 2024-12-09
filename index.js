@@ -100,7 +100,7 @@ function TocheckBase() {
 
 
 function toBinary() {
-    convertToBase(2);
+    NewCo(2);
 }
     
 
@@ -109,23 +109,24 @@ function toDec() {
 }
 function toOctal() 
 {
- convertToBase(8);
+ NewCo(8);
 }
    
 
 function toHexadecimal() {
-    const input = display.value.trim(); // Get input and trim whitespace
-    let base = TocheckBase() // Default to decimal
+    NewCo(16);
+    // const input = display.value.trim(); // Get input and trim whitespace
+    // let base = TocheckBase() // Default to decimal
 
-    // Convert to decimal
-    const decimalValue = parseInt(input, base);
+    // // Convert to decimal
+    // const decimalValue = parseInt(input, base);
 
-    if (!isNaN(decimalValue)) {
-        display.value = decimalValue.toString(16).toUpperCase(); // Convert to Hexadecimal string
-    } else {
-        display.value = "Error";
-        alert("Invalid input! Please enter a valid number.");
-    }
+    // if (!isNaN(decimalValue)) {
+    //     display.value = decimalValue.toString(16).toUpperCase(); // Convert to Hexadecimal string
+    // } else {
+    //     display.value = "Error";
+    //     alert("Invalid input! Please enter a valid number.");
+    // }
     }
 
     function convertToBase(targetBase) {
@@ -177,3 +178,10 @@ function resetModes() {
         // Reset number button visibility
         resetButtons();
     }
+
+function NewCo(base){
+    if (display.value){
+        display.value = parseInt(display.value).toString(base).toUpperCase();
+        isConverted=true;
+    }
+}
