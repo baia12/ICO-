@@ -1,14 +1,18 @@
 const display = document.getElementById("display");
-
+let isConverted = false; // Flag to track if a conversion was performed
 function appendToDisplay(input) {
+  
+    if (isConverted){
+        display.value ='';
+        isConverted=false; // Clear the display if a conversion was performed
+    }
     display.value += input;
-    if (display.value == 99995){display.value = "HACKED"}else{}
+    if (display.value == 99995){display.value = "I LOvE YOU"}else{}
 }
 
 function showButtonsForBase(base) {
     const Numbuttons = document.querySelectorAll('.num-btn');//number button 
     const convertButtons = document.querySelectorAll('.conv-btn');// Conversion buttons
-    
     Numbuttons.forEach(button => {
         const value = button.innerText; // Get button label
         
@@ -46,9 +50,8 @@ function showButtonsForBase(base) {
 
 
 
-
 function clearDisplay() {
-    display.value = "";
+    display.value = ""; //clear display
 }
 function deleteLastChar() {
     const currentValue = display.value; // Get the current input value
@@ -56,31 +59,7 @@ function deleteLastChar() {
         display.value = currentValue.slice(0, -1); // Remove the last character
     }
 }
-function modeHex(){const buttons = document.querySelectorAll('.num-btn');
-    buttons.forEach(button => {
-        const value = button.innerText;
-        if (!/[0-9A-F]/.test(value)) {
-            button.style.display = 'none'; // Hide non-decimal buttons
-        }
-    });}
-function modeBin(){const buttons = document.querySelectorAll('.num-btn');
-    buttons.forEach(button => {
-        const value = button.innerText;
-        if (!/[01]/.test(value)) {
-            button.style.display = 'none'; // Hide non-decimal buttons
-        }
-    });}
 
-
-function showOnlyDecimal() {
-    const buttons = document.querySelectorAll('.num-btn');
-    buttons.forEach(button => {
-        const value = button.innerText;
-        if (!/[0-9]/.test(value)) {
-            button.style.display = 'none'; // Hide non-decimal buttons
-        }
-    });
-}
 function resetButtons() {
     const buttons = document.querySelectorAll('.num-btn');
     const convertButtons = document.querySelectorAll('.conv-btn');
@@ -94,18 +73,12 @@ function resetButtons() {
         button.style.pointerEvents = 'auto';
     });
 }
-function modeOct(){const buttons = document.querySelectorAll('.num-btn');
-    buttons.forEach(button => {
-        const value = button.innerText;
-        if (!/[0-7]/.test(value)) {
-            button.style.display = 'none'; // Hide non-decimal buttons
-        }
-    });}
-function calculate() {
+
+ function calculate() { //not include
     try {
         display.value = eval(display.value);
     } catch (error) {
-        display.value = "I LOVE YOU ";
+        display.value = "ERR0R ";
     }
 }
 
@@ -127,64 +100,88 @@ function TocheckBase() {
 
 
 function toBinary() {
-    const input = display.value.trim(); // Get input and trim whitespace
-    let base = TocheckBase() // Default to decimal
-
-    // Convert to decimal
-    const decimalValue = parseInt(input, base);
-
-    if (!isNaN(decimalValue)) {
-        display.value = decimalValue.toString(2); // Convert to binary string
-    } else {
-        display.value = "Error";
-        alert("Invalid input! Please enter a valid number.");
-    }
+    NewCo(2);
 }
     
 
 function toDec() {
-    const input = display.value.trim(); // Get input and trim whitespace
-    let base = TocheckBase() // Default to decimal
-
-    // Convert to decimal
-    const decimalValue = parseInt(input, base);
-
-    if (!isNaN(decimalValue)) {
-        display.value = decimalValue.toString(10); // Convert to dec string
-    } else {
-        display.value = "Error";
-        alert("Invalid input! Please enter a valid number.");
-    }
+    convertToBase(10);
 }
 function toOctal() 
 {
-    const input = display.value.trim(); // Get input and trim whitespace
-    let base = TocheckBase() // Default to decimal
-
-    // Convert to decimal
-    const decimalValue = parseInt(input, base);
-
-    if (!isNaN(decimalValue)) {
-        display.value = decimalValue.toString(8); // Convert to octal string
-    } else {
-        display.value = "Error";
-        alert("Invalid input! Please enter a valid number.");
-    }
+ NewCo(8);
 }
    
 
 function toHexadecimal() {
-    const input = display.value.trim(); // Get input and trim whitespace
-    let base = TocheckBase() // Default to decimal
+    NewCo(16);
+    // const input = display.value.trim(); // Get input and trim whitespace
+    // let base = TocheckBase() // Default to decimal
 
-    // Convert to decimal
-    const decimalValue = parseInt(input, base);
+    // // Convert to decimal
+    // const decimalValue = parseInt(input, base);
 
-    if (!isNaN(decimalValue)) {
-        display.value = decimalValue.toString(16).toUpperCase(); // Convert to Hexadecimal string
-    } else {
-        display.value = "Error";
-        alert("Invalid input! Please enter a valid number.");
+    // if (!isNaN(decimalValue)) {
+    //     display.value = decimalValue.toString(16).toUpperCase(); // Convert to Hexadecimal string
+    // } else {
+    //     display.value = "Error";
+    //     alert("Invalid input! Please enter a valid number.");
+    // }
     }
+
+    function convertToBase(targetBase) {
+        const input = display.value.trim(); // Get and clean the input
+        const currentBase = TocheckBase(); // Detect the base of the input using your existing TocheckBase() function
+    
+        // Convert the input to decimal first
+        const decimalValue = parseInt(input, currentBase);
+    
+        if (!isNaN(decimalValue)) {
+            // Convert the decimal value to the target base and update the display
+            display.value = decimalValue.toString(targetBase).toUpperCase();
+            isConverted=true;
+        } else {
+            display.value = "Error";
+            alert("Invalid input! Please enter a valid number.");
+        }
+    }
+function setMode(base) {
+        const modeButtons = document.querySelectorAll('.mode-btn'); // Select all mode buttons
+    
+        // Disable all other mode buttons except the selected one
+        modeButtons.forEach(button => {
+            if (parseInt(button.dataset.base) === base) {
+                button.disabled = true; // Disable the selected mode button
+               
+                button.classList.add('active'); // Highlight the active mode
+            } else {
+                button.disabled = true; // Disable other buttons
+                button.classList.remove('active'); // Remove highlight from other modes
+                button.style.opacity = '0.3'; 
+            }
+        });
+    
+        // Call showButtonsForBase to update input buttons visibility
+        showButtonsForBase(base);
     }
 
+function resetModes() {
+        const modeButtons = document.querySelectorAll('.mode-btn');
+    
+        // Enable all mode buttons and remove active highlight
+        modeButtons.forEach(button => {
+            button.disabled = false;
+            button.classList.remove('active');
+            button.style.opacity = '1';
+        });
+    
+        // Reset number button visibility
+        resetButtons();
+    }
+
+function NewCo(base){
+    if (display.value){
+        display.value = parseInt(display.value).toString(base).toUpperCase();
+        isConverted=true;
+    }
+}

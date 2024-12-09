@@ -29,21 +29,21 @@
             <button class="num-btn" onclick="appendToDisplay('7')">7</button>
             <button class="num-btn" onclick="appendToDisplay('8')">8</button>
             <button class="num-btn" onclick="appendToDisplay('9')">9</button>
-            <button onclick="showButtonsForBase(10)" class="mode-btn">DEC</button>
+            <button data-base="10" onclick="setMode(10)"class="mode-btn">DEC</button>
             <button  class="num-btn" onclick="appendToDisplay('4')">4</button>
             <button class="num-btn"  onclick="appendToDisplay('5')">5</button>
             <button class="num-btn"  onclick="appendToDisplay('6')">6</button>                   
             <button class="num-btn" onclick="appendToDisplay('1')">1</button>
-            <button onclick="showButtonsForBase(2)" class="mode-btn">BIN</button>
+            <button onclick="setMode(2)" data-base="2" class="mode-btn">BIN</button>
             <button class="num-btn" onclick="appendToDisplay('2')">2</button>
             <button class="num-btn" onclick="appendToDisplay('3')">3</button>          
             <button class="num-btn" onclick="appendToDisplay('0')">0</button>
             <!-- <button class="num-btn" onclick="appendToDisplay('.')">.</button> -->
-            <button onclick="showButtonsForBase(8)" class="mode-btn">OCT</button> 
-            <!-- <button id="dec-btn" onclick="showButtonsForBase(2)">Deco</button> -->
-            <button onclick="showButtonsForBase(16)" class="mode-btn">HEX</button> 
-            <button onclick="resetButtons()" class="operator-btn"><i class="fa fa-refresh fa-spin"></i></button>
-        
+            <button data-base="8" onclick="setMode(8)" class="mode-btn">OCT</button> 
+            <!-- <button id="dec-btn" onclick="NewCo(2)">Deco</button> -->
+            <button onclick="setMode(16)" data-base="16"  class="mode-btn">HEX</button> 
+            <!-- <button onclick="resetButtons()" class="operator-btn"><i class="fa fa-refresh fa-spin"></i></button> -->
+            <button onclick="resetModes()" class="operator-btn"><i class="fa fa-refresh"></i></button>
         </div>
     </div>
 
