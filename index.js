@@ -100,34 +100,27 @@ function TocheckBase() {
 
 
 function toBinary() {
-    NewCo(2);
+    const input = display.value.trim();
+    if (/^[0-9A-Fa-f]+$/.test(input)) { convertToBase(10);}{NewCo(2);}
+
 }
     
 
 function toDec() {
     convertToBase(10);
+//    if (/^[0-9A-Fa-f]+$/.test(input)) { convertToBase(10);}{NewCo(10);}
+    //NewCo(10);
 }
 function toOctal() 
-{
- NewCo(8);
+{  const input = display.value.trim();
+    if (/^[0-9A-Fa-f]+$/.test(input)) { convertToBase(10);}{NewCo(8);}
+
 }
    
 
 function toHexadecimal() {
     NewCo(16);
-    // const input = display.value.trim(); // Get input and trim whitespace
-    // let base = TocheckBase() // Default to decimal
-
-    // // Convert to decimal
-    // const decimalValue = parseInt(input, base);
-
-    // if (!isNaN(decimalValue)) {
-    //     display.value = decimalValue.toString(16).toUpperCase(); // Convert to Hexadecimal string
-    // } else {
-    //     display.value = "Error";
-    //     alert("Invalid input! Please enter a valid number.");
-    // }
-    }
+}
 
     function convertToBase(targetBase) {
         const input = display.value.trim(); // Get and clean the input
